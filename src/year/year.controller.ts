@@ -24,11 +24,11 @@ export class YearController {
       await validateOrReject(body);
 
       const birthYear: number = this.getBirthYear(body.age);
-
+      /// make delay for 2 seconds to simulate a long process thin time out will be thrown 
+      await new Promise((resolve) => setTimeout(resolve, 2));
       return {
         name: body.name,
-        year: birthYear,
-        message: 'Your year of birth is ' + birthYear,
+        birthYear,
       };
     } catch (error) {
       throw new HttpException('Invalid request', HttpStatus.BAD_REQUEST);
